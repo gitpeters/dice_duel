@@ -12,7 +12,7 @@ class WinnerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final winnerScore = summary.scores[summary.winner - 1];
-    final loserScore = summary.scores[summary.winner - summary.winner];
+    final loserScore = summary.scores[summary.winner == 1 ? 1: 0];
     final totalWinnerSix = summary.history
         .where((r) => r.player == summary.winner && r.value == 6)
         .length;
