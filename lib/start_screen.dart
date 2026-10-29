@@ -12,11 +12,9 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Center(
-        child: Expanded(
+    return Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Transform.rotate(angle: -8 * pi / 180, child: DieFace(5)),
               SizedBox(height: 25),
@@ -59,8 +57,6 @@ class StartScreen extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
     );
   }
 }

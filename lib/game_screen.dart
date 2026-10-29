@@ -28,105 +28,108 @@ class _GameScreenState extends State<GameScreen> {
   final randomizer = Random();
 
   void rollDice() {
-    final roll  = randomizer.nextInt(6) + 1;
+    final roll = randomizer.nextInt(6) + 1;
     setState(() {
       lastRoll = roll;
       lastPlayer = currentPlayer;
 
-      scores[currentPlayer -1] += roll;
-      history.add(RollRecord(currentPlayer, roll, scores[currentPlayer -1]));
+      scores[currentPlayer - 1] += roll;
+      history.add(RollRecord(currentPlayer, roll, scores[currentPlayer - 1]));
 
       if (roll != 6) {
         currentPlayer = currentPlayer == 1 ? 2 : 1;
       }
 
-      if (scores[lastPlayer -1] >= 30) {
+      if (scores[lastPlayer - 1] >= 30) {
         widget.processResult(GameSummary(lastPlayer, scores, history));
       }
-
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'Dice Duel',
-                  style: GoogleFonts.fredoka(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  width: 100,
-                  padding: EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(208, 45, 53, 97),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'First to 30',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+            Text(
+              'Dice Duel',
+              style: GoogleFonts.fredoka(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                PlayerCard(1, scores[0], currentPlayer == 1),
-                PlayerCard(2, scores[1], currentPlayer == 2),
-              ],
-            ),
-            Column(
-              children: [
-                Text(
-                  "Player $currentPlayer's turn",
-                  style: GoogleFonts.fredoka(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+            Container(
+              width: 100,
+              padding: EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(208, 45, 53, 97),
+                borderRadius: BorderRadius.circular(50),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                'First to 30',
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 20),
-                DieFace(lastRoll),
-                SizedBox(height: 20),
-                Text(
-                  lastRoll == null ? 'Tap Roll to start' : 'Player $lastPlayer rolled a $lastRoll',
-                  style: GoogleFonts.poppins(color: Colors.white, fontSize: 16),
-                ),
-                SizedBox(height: 80),
-                OutlinedButton(
-                  onPressed: rollDice,
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Color(0xFF4ECDC4),
-                    foregroundColor: Colors.black,
-                    // padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                    fixedSize: const Size(370, 70),
-                  ),
-                  child: Text(
-                    'Roll',
-                    style: GoogleFonts.fredoka(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            PlayerCard(1, scores[0], currentPlayer == 1),
+            PlayerCard(2, scores[1], currentPlayer == 2),
+          ],
+        ),
+        Column(
+          children: [
+            Text(
+              "Player $currentPlayer's turn",
+              style: GoogleFonts.fredoka(
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 20),
+            DieFace(lastRoll),
+            SizedBox(height: 20),
+            Text(
+              lastRoll == null
+                  ? 'Tap Roll to start'
+                  : 'Player $lastPlayer rolled a $lastRoll',
+              style: GoogleFonts.poppins(color: Colors.white, fontSize: 16),
+            ),
+            SizedBox(height: 80),
+            OutlinedButton(
+              onPressed: rollDice,
+              style: OutlinedButton.styleFrom(
+                backgroundColor: currentPlayer == 1
+                    ? const Color(0xFFFF6B6B)
+                    : const Color(0xFF4ECDC4),
+                minimumSize: const Size.fromHeight(
+                  70,
+                ), // replaces fixedSize: Size(370, 70)
+                foregroundColor: Colors.black,
+              ),
+              child: Text(
+                'Roll',
+                style: GoogleFonts.fredoka(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
