@@ -34,7 +34,7 @@ class _DiceDuelState extends State<DiceDuel> {
 
   void restartGame() {
     setState(() {
-      summary = GameSummary(0, [], []);
+      summary = null;
       activeScreen = 'start-screen';
     });
   }
