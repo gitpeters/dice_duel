@@ -50,9 +50,7 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Expanded(
-        child: Column(
+    return Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Row(
@@ -129,8 +127,6 @@ class _GameScreenState extends State<GameScreen> {
               ],
             ),
           ],
-        ),
-      ),
     );
   }
 }
