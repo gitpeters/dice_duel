@@ -1,4 +1,5 @@
-# dice_duel
+# Dice Duel
+## Mobile app development journey #1
 
 A new Flutter project.
 
