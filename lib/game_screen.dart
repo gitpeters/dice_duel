@@ -106,7 +106,7 @@ class _GameScreenState extends State<GameScreen> {
                 DieFace(lastRoll),
                 SizedBox(height: 20),
                 Text(
-                  lastRoll == null ? 'Tap Roll to start' : "Player $currentPlayer rolled a $lastRoll",
+                  lastRoll == null ? 'Tap Roll to start' : 'Player $lastPlayer rolled a $lastRoll',
                   style: GoogleFonts.poppins(color: Colors.white, fontSize: 16),
                 ),
                 SizedBox(height: 80),
